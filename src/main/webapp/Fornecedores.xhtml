@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+	<center> <h1> CADASTRO DE FORNECEDORES </h1></center> 
+</h:head>
+
+<h:body>
+	<center>
+		<h:form> 
+			<p:panelGrid columns="2" styleClass="panelGridCenter">
+				
+				<h:outputLabel value="NOME:" for="nome"/>
+				<p:inputText a:placeholder="Ex: Luiz Pagnossim" value="#{fornecBean.fornecedores.nome}" id="nome" required="true" requiredMessage="Necessário cadastrar nome do fornecedor"/>  
+				
+				<h:outputLabel value="TELEFONE:" for="telefone"/>
+				<p:inputMask a:placeholder="Ex: 11 97598-6842" value="#{fornecBean.fornecedores.telefone}"  mask="(99)99999-9999" id="telefone" required="true" requiredMessage="Necessário cadastrar o telefone"/>
+				
+				<h:outputLabel value="E-MAIL:" for="email"/>
+				<p:inputText a:placeholder="Ex: luiz@drummond.com.br" value="#{fornecBean.fornecedores.email}" id="email" required="true" requiredMessage="Necessário cadastrar o e-mail"/>
+				
+				<p:commandButton action="#{fornecBean.Salvar}" value="Salvar" ajax="false"/>
+				
+			</p:panelGrid> <br style="clear: center;"/>
+		</h:form>
+
+		<h:form>
+			<p:dataTable value="#{fornecBean.lista}" var="lis" border="2"> 
+			
+		<p:column headerText="Código" style="width: 55px">
+			<h:outputText value="#{lis.codigo}"/> 
+		</p:column>
+		
+		<p:column headerText="Nome" style="width: 200px">
+			<h:outputText value="#{lis.nome}"/> 
+		</p:column>
+		
+		<p:column headerText="Telefone" style="width: 200px">
+			<h:outputText value="#{lis.telefone}"/> 
+		</p:column>
+		
+		<p:column headerText="E-mail" style="width: 200px">
+			<h:outputText value="#{lis.email}"/> 
+		</p:column>
+						
+		<p:column headerText="Ação 1" style="width: 70px"> 
+			<p:commandButton action="#{fornecBean.Deletar(lis)}" value="Excluir" id="delete" ajax="false"/>
+		</p:column>
+		
+		<p:column headerText="Ação 2" style="width: 70px"> 
+			<p:commandButton action="#{fornecBean.Carregar(lis)}" value="Atualizar" id="update" ajax="false"/>
+		</p:column>
+			</p:dataTable>
+		<br style="clear: center;"/> 
+			<p:commandButton value="Voltar" action="Tela1" ajax="false"/> 
+		<br/>
+		</h:form>
+	</center>
+	</h:body>
+	<p:messages/> 
+</html>

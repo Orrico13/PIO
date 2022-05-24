@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+	<center> <h1> CADASTRO DE CLIENTES </h1></center> 
+</h:head>
+
+<h:body>
+	<center>
+		<h:form> 
+			<p:panelGrid columns="2" styleClass="panelGridCenter">
+				
+				<h:outputLabel value="NOME:" for="nome"/>
+				<p:inputText a:placeholder="Ex: Gilberto Silva" value="#{clientesBean.clientes.nome}" id="nome" required="true" requiredMessage="Necessário cadastrar nome do cliente"/>  
+				
+				<h:outputLabel value="DATA DE NASCIMENTO:" for="dt_nascimento"/>
+				<p:inputMask a:placeholder="Ex: 14/12/2000" value="#{clientesBean.clientes.nascimento}" mask="99/99/9999" id="dt_nascimento" required="true" requiredMessage="Necessário cadastrar uma data de nascimento"/> 
+				
+				<h:outputLabel value="SEXO:" for="sexo"/>
+				<p:selectOneRadio value="#{clientesBean.clientes.sexo}" unselectable="true" required="true" requiredMessage="Necessário selecionar uma opção"> 
+					<f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+					<f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+					<f:selectItem itemLabel="Indefinido" itemValue="Indefinido"/>
+				</p:selectOneRadio>
+				
+				<h:outputLabel value="TELEFONE:" for="telefone"/>
+				<p:inputMask a:placeholder="Ex: 11 97598-6842" value="#{clientesBean.clientes.telefone}"  mask="(99)99999-9999" id="telefone" required="true" requiredMessage="Necessário cadastrar o telefone"/>
+				
+				<h:outputLabel value="E-MAIL:" for="email"/>
+				<p:inputText a:placeholder="Ex: gilberto.silva@gmail.com" value="#{clientesBean.clientes.email}" id="email" required="true" requiredMessage="Necessário cadastrar o e-mail do cliente"/>
+				
+				<h:outputLabel value="CIDADE:" for="cidade"/>
+				<p:inputText a:placeholder="Ex: São Paulo" value="#{clientesBean.clientes.cidade}" id="cidade" required="true" requiredMessage="Necessário cadastrar a cidade do cliente"/>
+				
+				<h:outputLabel value="ESTADO:" for="estado"/>
+				<p:inputText a:placeholder="Ex: SP" value="#{clientesBean.clientes.estado}" id="estado" required="true" requiredMessage="Necessário cadastrar o estado do cliente"/>
+				
+				<p:commandButton action="#{clientesBean.Salvar}" value="Salvar" ajax="false"/>
+				
+			</p:panelGrid> <br style="clear: center;"/>
+		</h:form>
+		
+		<h:form>
+			<p:dataTable value="#{clientesBean.lista}" var="lis" border="2"> 
+			
+		<p:column headerText="Código" style="width: 55px">
+			<h:outputText value="#{lis.codigo}"/> 
+		</p:column>
+		
+		<p:column headerText="Nome" style="width: 200px">
+			<h:outputText value="#{lis.nome}"/> 
+		</p:column>
+		
+		<p:column headerText="Data de Nascimento" style="width:100px">
+			<h:outputText value="#{lis.nascimento}"/>
+		</p:column>
+		
+		<p:column headerText="Sexo" style="width:100px"> 
+			<h:outputText value="#{lis.sexo}"/>
+		</p:column>
+		
+		<p:column headerText="Telefone" style="width: 110px">
+			<h:outputText value="#{lis.telefone}"/> 
+		</p:column>
+		
+		<p:column headerText="E-mail" style="width: 200px">
+			<h:outputText value="#{lis.email}"/> 
+		</p:column>
+		
+		<p:column headerText="Cidade" style="width: 200px"> 
+			<h:outputLabel value="#{lis.cidade}" />
+		</p:column>
+		
+		<p:column headerText="Estado" style="width: 55px"> 
+			<h:outputLabel value="#{lis.estado}"/>
+		</p:column>
+		
+		<p:column headerText="Ação 1" style="width: 100px"> 
+			<p:commandButton action="#{clientesBean.Deletar(lis)}" value="Excluir" id="delete" ajax="false"/>
+		</p:column>
+		
+		<p:column headerText="Ação 2" style="width: 100px"> 
+			<p:commandButton action="#{clientesBean.Carregar(lis)}" value="Atualizar" id="update" ajax="false"/>
+		</p:column>
+			</p:dataTable> 
+			<br style="clear: center;"/> 
+			<p:commandButton value="Voltar" action="Tela1" ajax="false"/> <br/>
+		</h:form>
+	</center>
+	</h:body>
+	<p:messages/> 
+    
+</html>

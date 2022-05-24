@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://java.sun.com/jsf/html"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:ui="http://java.sun.com/jsf/facelets"
+xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+	<center> <h1> CADASTRO DE PRODUTOS </h1></center> 
+</h:head>
+
+<h:body>
+	<center>
+		<h:form> 
+			<p:panelGrid columns="2" styleClass="panelGridCenter">
+				
+				<h:outputLabel value="DESCRIÇÃO:" for="descricao"/>
+				<p:inputText a:placeholder="Ex: Teclado Logitech" value="#{produtosBean.produtos.descricao}" id="descricao" required="true" requiredMessage="Necessário cadastrar nome do produto"/>  
+				
+				<h:outputLabel value="UNIDADE:" for="unidade"/>
+				<p:inputText a:placeholder="Ex: UN, CX, PTE, PC" value="#{produtosBean.produtos.unidade}" id="unidade" required="true" requiredMessage="Necessário cadastrar a unidade"/>
+				
+				<h:outputLabel value="VALOR:" for="valor"/>
+				<p:inputNumber a:placeholder="Ex: 250.00" value="#{produtosBean.produtos.valor}" modifyValueOnWheel="false" id="valor" required="true" requiredMessage="Necessário cadastrar o valor"/>
+				
+				<p:commandButton action="#{produtosBean.Salvar}" value="Salvar" ajax="false"/>
+				
+			</p:panelGrid> <br style="clear: center;"/>
+		</h:form>
+
+		<h:form>
+			<p:dataTable value="#{produtosBean.lista}" var="lis" border="2"> 
+			
+		<p:column headerText="Código" style="width: 55px">
+			<h:outputText value="#{lis.codigo}"/> 
+		</p:column>
+		
+		<p:column headerText="Descrição" style="width: 100px">
+			<h:outputText value="#{lis.descricao}"/> 
+		</p:column>
+		
+		<p:column headerText="Unidade" style="width: 110px">
+			<h:outputText value="#{lis.unidade}"/> 
+		</p:column>
+		
+		<p:column headerText="Valor" style="width: 200px">
+			<h:outputText value="#{lis.valor}"/> 
+		</p:column>
+		
+		<p:column headerText="Ação 1" style="width: 100px"> 
+			<p:commandButton action="#{produtosBean.Deletar(lis)}" value="Excluir" id="delete" ajax="false"/>
+		</p:column>
+		
+		<p:column headerText="Ação 2" style="width: 100px"> 
+			<p:commandButton action="#{produtosBean.Carregar(lis)}" value="Atualizar" id="update" ajax="false"/>
+		</p:column>
+			</p:dataTable>
+		<br style="clear: center;"/> 
+			<p:commandButton value="Voltar" action="Tela1" ajax="false"/> 
+		<br/>
+		</h:form>
+	</center>
+	</h:body>
+	<p:messages/> 
+</html>
